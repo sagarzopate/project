@@ -1,13 +1,21 @@
+/* text editor functions */
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
 #include <errno.h>
+#include <graphics.h>
+
+/* creates a file and saves the data by entering # */ 
 void Create() {
 	FILE *fp1, *fp2;
 	char name[200], ch;
 	fp1 = fopen("untitle.txt","w");
+	if (fp1 == NULL) {
+		perror("cannot open");
+		return;
+	}
 	printf("\n\tEnter the text and press '#' to save\n\n\t");
 	while(1) {
 		ch = getchar();
@@ -18,16 +26,23 @@ void Create() {
 			scanf("%s",name);
 			fp1 = fopen("untitle.txt","r");
 		  	fp2 = fopen(name,"w");
+			if (fp1 == NULL) {
+				perror("cannot open");
+				return;
+			}		
 		   	while(!feof(fp1)) {
 			    	ch = getc(fp1);
 			    	putc(ch,fp2);
 		   	}
 	   		fclose(fp2);
+			printf("file successfully created.");
 	   		break;
   		}
 	}
+	getch();
 }
 
+/* Deletes a file with the data inside it */
 void Delete() {
 	FILE *fp;
 	char name[200];
@@ -45,8 +60,11 @@ void Delete() {
 	}
 	else
 	printf("\n\tError!\n");
+	getch();
 	
 }
+
+/* Displays the data in the file given as input */
 void Display() {
 	char name[200];
 	char ch;
@@ -63,8 +81,7 @@ void Display() {
 		printf("%c",ch);
 	}
 	fclose(fp);
+	getch();
 	
 }
-void Edit() {
-return;
-}
+
