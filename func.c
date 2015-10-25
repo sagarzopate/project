@@ -85,3 +85,34 @@ void Display() {
 	
 }
 
+/* Appends the data in the input file */
+void Edit() {
+	FILE *fp;
+	char c;
+	char name[200];
+	printf("\n\tEnter the file name: ");
+	scanf("%s",name);
+	fp = fopen(name,"r");
+	if(fp == NULL) {
+		perror("cannot open");
+		return;
+	}
+	while(!feof(fp)) {
+		c = getc(fp);
+		printf("%c",c);
+	}
+	fclose(fp);
+	printf("\n\tType the text and press '&' and enter key to append.\n");
+	fp = fopen(name,"a");
+	while(1) {
+		c = getchar();
+		fputc(c,fp);
+		if(c == '&') {
+			fclose(fp);
+			printf("file edited succesfully");
+			break;
+		}
+		
+	}	
+	getch();
+}
