@@ -16,7 +16,7 @@ void Create() {
 		perror("cannot open");
 		return;
 	}
-	printf("\n\tEnter the text and press '#' to save\n\n\t");
+	printf("\n\tEnter the text and press '#' and enter key to save\n\n\t");
 	while(1) {
 		ch = getchar();
 		fputc(ch,fp1);
@@ -35,11 +35,12 @@ void Create() {
 			    	putc(ch,fp2);
 		   	}
 	   		fclose(fp2);
-			printf("file successfully created.");
+			fclose(fp1);
+			remove("untitle.txt");
+			printf("\tfile successfully created.");
 	   		break;
   		}
 	}
-	getch();
 }
 
 /* Deletes a file with the data inside it */
@@ -85,34 +86,39 @@ void Display() {
 	
 }
 
+
 /* Appends the data in the input file */
 void Edit() {
-	FILE *fp;
-	char c;
-	char name[200];
+	FILE *fp1, *fp2;
+	char c, ch;
+	char name[100], name1[100];
 	printf("\n\tEnter the file name: ");
 	scanf("%s",name);
-	fp = fopen(name,"r");
-	if(fp == NULL) {
+	fp1 = fopen(name,"r");
+	if(fp1 == NULL) {
 		perror("cannot open");
 		return;
 	}
-	while(!feof(fp)) {
-		c = getc(fp);
+	while(!feof(fp1)) {
+		c = getc(fp1);
 		printf("%c",c);
 	}
-	fclose(fp);
-	printf("\n\tType the text and press '&' and enter key to append.\n");
-	fp = fopen(name,"a");
+	fclose(fp1);
+	printf("\n\tType the text and press '&' and enter key to append.\n\n\t");
+	fp1 = fopen(name,"a");
 	while(1) {
 		c = getchar();
-		fputc(c,fp);
+		fputc(c,fp1);
 		if(c == '&') {
-			fclose(fp);
-			printf("file edited succesfully");
+			fclose(fp1);
+			printf("\n\tEnter the edited filename: ");
+			scanf("%s",name1);
+			rename(name, name1);
+			printf("\tfile edited succesfully");
 			break;
 		}
 		
 	}	
 	getch();
 }
+
