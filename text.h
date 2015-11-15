@@ -54,3 +54,6 @@ void paste_menuitem_clicked(GtkMenuItem *,gpointer);
 void contents_menuitem_clicked(GtkMenuItem *,gpointer);
 
 /*our actual function definitions:*/
+
+
+

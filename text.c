@@ -397,3 +397,4 @@ void contents_menuitem_clicked(GtkMenuItem *item, gpointer data) {
 	gtk_widget_show_all(window);
 }
 
+

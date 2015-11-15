@@ -15,3 +15,4 @@ Text Editor using GTK
 	* In help all the instructions are provided on how to use the text editor.
 	* all the functions are provided in menubar.        
 
+
